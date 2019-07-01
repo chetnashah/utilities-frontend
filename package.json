@@ -10,6 +10,7 @@
     "serve": "11.0.2"
   },
   "scripts": {
+    "deploy": "npm run build && aws s3 sync build/ s3://utilities-frontend.jayshah.co",
     "serve": "serve -s build",
     "start": "react-scripts start",
     "build": "react-scripts build",
