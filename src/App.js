@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Axios from 'axios';
-
-// const baseUrl = "http://utilities.jayshah.co:3000";
-const baseUrl = "http://localhost:3000";
+console.log("process.env.NODE_ENV = " + process.env.NODE_ENV);
+const baseUrl = (process.env.NODE_ENV === 'development') 
+? 'http://localhost:3000' 
+: "https://utilities.jayshah.co:3443";
 
 function App() {
   
@@ -19,12 +19,17 @@ function App() {
     console.log( firstFile.current.files[0]);
     const formData = new FormData();
     formData.append('avatar', firstFile.current.files[0]);
-    const response = await Axios.post(`${baseUrl}/formpostwithfile`,formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
-    console.log('got response: ', response);
+    try{
+      const response = await Axios.post(`${baseUrl}/formpostwithfile`,formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      console.log('got response: ', response);
+      alert(JSON.stringify(response.data));
+    } catch(err) {
+      alert(err.toString());
+    }
   }
   
   const autoFormSubmit = () => {
@@ -40,7 +45,7 @@ function App() {
         'contenttype': targetFile.type
       }
     });
-    debugger;
+    
     const uploadUrl = response.data.url;
 
     const uploadResponse = await Axios.put(uploadUrl, targetFile, {
@@ -68,7 +73,7 @@ function App() {
 
         <div style={{"border": "1px solid blue"}}>
           form submit on select file
-          <form action="http://example.com">
+          <form action="">
             <input ref={file2} type="file" onChange={autoFormSubmit} />
           </form>
         </div>
