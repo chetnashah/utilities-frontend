@@ -141,8 +141,13 @@ function App(props) {
         </div>
 
                 <div style={{"border": "1px solid green"}}>
-        signed upload flow(upload on select)
-          <input ref={file4} type="file" onChange={onFileSelect4} />
+        signed upload flow(upload on select) with capture=camera
+          <input 
+            capture="camera"
+            accept="image/*"
+            ref={file4}
+            type="file"
+            onChange={onFileSelect4} />
         </div>
 
 
