@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react';
 import Store from "./Store";
+import firebaseAuth from './firebaseAuthSetup';
 
 ReactDOM.render((<Provider Store={Store}>
     <App /></Provider>), document.getElementById('root'));
