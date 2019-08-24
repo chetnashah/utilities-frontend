@@ -18,8 +18,6 @@ export default function Login(props) {
                             password: values.password,    
                         },
                         withCredentials: true
-                    }, {
-                        withCredentials: true
                     }).then(response => {
                         console.log('login response: ');
                         console.log(response);
