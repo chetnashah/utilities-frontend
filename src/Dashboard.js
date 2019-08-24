@@ -1,6 +1,8 @@
 import React from 'react'
+import ".//firebaseMessagingSetup";
 
 export default function Dashboard() {
+
     return (
         <div>
             Welcome to the dashboard!
