@@ -10,6 +10,8 @@ const DEBUG = process.env.NODE_ENV !== 'production';
 const sendTokenToServer = (fcmToken) => {
     Axios.post(`${baseUrl}/postFcmToken`, {
         fcmToken
+    }, {
+      withCredentials: true
     });
 }
 

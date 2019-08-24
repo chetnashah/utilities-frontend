@@ -13,6 +13,8 @@ export default function Login(props) {
                     Axios.post(`${baseUrl}/login`,{
                         email: values.email,
                         password: values.password,
+                    }, {
+                        withCredentials: true
                     }).then(response => {
                         console.log('login response: ');
                         console.log(response);
