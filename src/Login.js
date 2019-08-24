@@ -13,6 +13,12 @@ export default function Login(props) {
                     Axios.post(`${baseUrl}/login`,{
                         email: values.email,
                         password: values.password,
+                    }).then(response => {
+                        console.log('login response: ');
+                        console.log(response);
+                        if(response && response.data) {
+                            window.location.href = response.data.redirect;
+                        }
                     });
                 }}
                 validate={values => {

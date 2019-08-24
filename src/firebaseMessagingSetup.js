@@ -5,6 +5,8 @@ import "firebase/messaging";
 import Axios from 'axios';
 import { baseUrl } from './config';
 
+const DEBUG = process.env.NODE_ENV !== 'production';
+
 const sendTokenToServer = (fcmToken) => {
     Axios.post(`${baseUrl}/postFcmToken`, {
         fcmToken
@@ -18,7 +20,9 @@ messaging.requestPermission()
     return messaging.getToken();
 })
 .then(function(currentToken){
-    console.log('got token: ', currentToken);
+    if(DEBUG){
+      console.log('got token: ', currentToken);
+    }
 
     if (currentToken) {
         sendTokenToServer(currentToken);
@@ -36,7 +40,9 @@ messaging.requestPermission()
 })
 
 messaging.onMessage((payload) => {
+  if (DEBUG) {
     console.log('FCM Message received. ', payload);
+  }
     // ...
   });
   
