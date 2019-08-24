@@ -2,6 +2,7 @@ import React from 'react'
 import {Formik,Form, Field, ErrorMessage} from 'formik';
 import Axios from 'axios';
 import { baseUrl } from './config';
+Axios.defaults.withCredentials = true;
 
 export default function Login(props) {
     return (
@@ -10,9 +11,13 @@ export default function Login(props) {
                 initialValues={{email:"", password: ""}}
                 onSubmit={(values, {setSubmitting, resetForm}) => {
                     console.log('submitting: values: ', JSON.stringify(values));
-                    Axios.post(`${baseUrl}/login`,{
-                        email: values.email,
-                        password: values.password,
+                    Axios(`${baseUrl}/login`,{
+                        method: 'post',
+                        data: {
+                            email: values.email,
+                            password: values.password,    
+                        },
+                        withCredentials: true
                     }, {
                         withCredentials: true
                     }).then(response => {
