@@ -2,29 +2,17 @@ import React from 'react'
 import {Formik,Form, Field, ErrorMessage} from 'formik';
 import Axios from 'axios';
 import { baseUrl } from './config';
+import { observer, inject } from 'mobx-react';
 Axios.defaults.withCredentials = true;
 
-export default function Login(props) {
+function Login(props) {
     return (
         <div>
             <Formik
                 initialValues={{email:"", password: ""}}
                 onSubmit={(values, {setSubmitting, resetForm}) => {
                     console.log('submitting: values: ', JSON.stringify(values));
-                    Axios(`${baseUrl}/login`,{
-                        method: 'post',
-                        data: {
-                            email: values.email,
-                            password: values.password,    
-                        },
-                        withCredentials: true
-                    }).then(response => {
-                        console.log('login response: ');
-                        console.log(response);
-                        if(response && response.data) {
-                            window.location.href = response.data.redirect;
-                        }
-                    });
+                    props.authStore.login(values.email, values.password);
                 }}
                 validate={values => {
                     let errors = {};
@@ -59,3 +47,5 @@ export default function Login(props) {
         </div>
     )
 }
+
+export default inject("authStore")(observer(Login));

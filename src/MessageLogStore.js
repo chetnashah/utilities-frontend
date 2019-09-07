@@ -1,5 +1,5 @@
 import { observable, action } from "mobx";
-class Store{
+class MessageLogStore{
     @observable messageList = [];
 
     constructor(){
@@ -12,4 +12,4 @@ class Store{
     }
 }
 
-export default new Store();
+export default new MessageLogStore();

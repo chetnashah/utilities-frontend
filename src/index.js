@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react';
-import Store from "./Store";
+import authStore from "./AuthStore";
+import messageLogStore from './MessageLogStore';
 import firebaseAuth from './firebaseAuthSetup';
 
-ReactDOM.render((<Provider Store={Store}>
+ReactDOM.render((<Provider authStore={authStore} messageLogStore={messageLogStore}>
     <App /></Provider>), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

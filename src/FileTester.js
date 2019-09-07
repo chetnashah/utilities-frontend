@@ -25,7 +25,7 @@ function FileTester(props) {
     const onFirstFileSelect = (ev) => {
       ev.preventDefault();
       console.log(ev.currentTarget.files[0]);
-      props.Store.pushMessageToList('selected file: ' + JSON.stringify(getFileInfo(ev.currentTarget.files[0])));
+      props.messageLogStore.pushMessageToList('selected file: ' + JSON.stringify(getFileInfo(ev.currentTarget.files[0])));
     }
   
     const submitForm = async (ev) => {
@@ -42,9 +42,9 @@ function FileTester(props) {
           }
         });
         console.log('got response: ', response);
-        props.Store.pushMessageToList('success posting form file to server: ' + JSON.stringify(response.data));
+        props.messageLogStore.pushMessageToList('success posting form file to server: ' + JSON.stringify(response.data));
       } catch(err) {
-        props.Store.pushMessageToList('error doing formpostfile: ' + err.toString());
+        props.messageLogStore.pushMessageToList('error doing formpostfile: ' + err.toString());
       }
     }
     
@@ -63,27 +63,27 @@ function FileTester(props) {
           }
         });
         const uploadUrl = response.data.url;
-        props.Store.pushMessageToList('success getting singed url: ' + uploadUrl)
+        props.messageLogStore.pushMessageToList('success getting singed url: ' + uploadUrl)
         try{
           const uploadResponse = await Axios.put(uploadUrl, targetFile, {
             'Content-Type': targetFile.type
           });
           console.log(uploadResponse);
-          props.Store.pushMessageToList('success PUTing file to S3: ' + uploadResponse.status);
+          props.messageLogStore.pushMessageToList('success PUTing file to S3: ' + uploadResponse.status);
         } catch(exp) {
-          props.Store.pushMessageToList('Error doing PUT to S3' + exp.toString());
+          props.messageLogStore.pushMessageToList('Error doing PUT to S3' + exp.toString());
           return;
         }
     
       } catch(err) {
-        props.Store.pushMessageToList('Error getting singed url: '+ err.toString());
+        props.messageLogStore.pushMessageToList('Error getting singed url: '+ err.toString());
         return;
       }
     }
   
     const onFileSelect3 = (ev) => {
       console.log('on file select 3: ');
-      props.Store.pushMessageToList('selected file: ' + JSON.stringify(getFileInfo(ev.target.files[0])));
+      props.messageLogStore.pushMessageToList('selected file: ' + JSON.stringify(getFileInfo(ev.target.files[0])));
       console.log(ev);
     }
   
@@ -99,9 +99,9 @@ function FileTester(props) {
           }
         });
         const uploadUrl = response.data.url;
-        props.Store.pushMessageToList('Successfully singed, signed url: ' + uploadUrl);
+        props.messageLogStore.pushMessageToList('Successfully singed, signed url: ' + uploadUrl);
       } catch (exp) {
-        props.Store.pushMessageToList('error signing file: ' + exp.toString());
+        props.messageLogStore.pushMessageToList('error signing file: ' + exp.toString());
       }
     }
   
@@ -153,5 +153,5 @@ function FileTester(props) {
     );  
 }
 
-export default inject("Store")(observer(FileTester));
+export default inject("messageLogStore")(observer(FileTester));
 

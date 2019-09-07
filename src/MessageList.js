@@ -1,19 +1,19 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-@inject("Store")
+@inject("messageLogStore")
 @observer
 class MessageList extends React.Component {
     
     clearLog = () => {
-        this.props.Store.messageList = [];
+        this.props.messageLogStore.messageList = [];
     }
 
     render(){
         return (
             <React.Fragment>
             <button onClick={this.clearLog}>Clear Log</button>
-                {this.props.Store.messageList.map((message, idx) => {
+                {this.props.messageLogStore.messageList.map((message, idx) => {
                     return (
                         <div style={{ border: '1px solid white' }}key={idx}>
                             {message}
