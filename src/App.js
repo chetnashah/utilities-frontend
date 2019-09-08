@@ -6,6 +6,7 @@ import FileTester from './FileTester';
 import Dashboard from './Dashboard';
 import Login from './Login';
 import Header from './Header';
+import ProtectedRoute from './ProtectedRoute';
 console.log("process.env.NODE_ENV = " + process.env.NODE_ENV);
 
 function App(props) {
@@ -18,6 +19,7 @@ function App(props) {
         <Route path="/register" component={Register} />
         <Route path="/filetester" component={FileTester} />
         <Route path="/login" component={Login} />
+        <ProtectedRoute path="/protectedfileTester" component={FileTester} />
       </Switch>
     </Router>
   );

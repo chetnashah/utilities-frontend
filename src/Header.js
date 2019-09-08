@@ -11,7 +11,7 @@ function Header(props) {
         <div>
             <Link to="/register">Register</Link>
             <Link to="/login">Login</Link>
-            <Link to="/fileTester">Test Files</Link>
+            <Link to="/protectedfileTester">Protected Files</Link>
             <button onClick={() => { logMeInWithGoogle(); }}>Login via google</button>
             <button onClick={() => {logOut();}}>Logout</button>
         </div>
